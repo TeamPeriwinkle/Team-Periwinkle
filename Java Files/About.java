@@ -28,7 +28,7 @@ public class About {
         JLabel line6 = new JLabel("Alex Garcia");
         JLabel line7 = new JLabel("Mahiliet Awasso"); 
         JLabel line8 = new JLabel("Mey Vo");
-        JLabel line9 = new JLabel("Charmel Mbala, LuckyCharms");
+        JLabel line9 = new JLabel("Charmel Mbala, nickname: LuckyCharms");
         
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
         myPanel.add(line0);
