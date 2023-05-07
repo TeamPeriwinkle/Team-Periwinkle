@@ -24,7 +24,7 @@ public class About {
 		JLabel line2 = new JLabel("Email address of the user: " + email);
         JLabel line3 = new JLabel("This app is provided by Team Periwinkle.");
         JLabel line4 = new JLabel("Members of Team Periwinkle:");
-        JLabel line5 = new JLabel("Soe Lin");
+        JLabel line5 = new JLabel("Soe Lin, nickname: redpanda1222");
         JLabel line6 = new JLabel("Alex Garcia");
         JLabel line7 = new JLabel("Mahiliet Awasso"); 
         JLabel line8 = new JLabel("Mey Vo");
