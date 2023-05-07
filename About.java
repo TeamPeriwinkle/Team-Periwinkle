@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 public class About {
 	
+    private static final String VERSIONNUMBER = " 0.1";
 	private String firstname;
 	private String email;
 	private JPanel myPanel;
@@ -18,6 +19,7 @@ public class About {
 	}
 	
 	public void setup() {
+        JLabel line0 = new JLabel("Version Number:" + VERSIONNUMBER);
 		JLabel line1 = new JLabel("This app is registered to: " + firstname);
 		JLabel line2 = new JLabel("Email address of the user: " + email);
         JLabel line3 = new JLabel("This app is provided by Team Periwinkle.");
@@ -29,6 +31,7 @@ public class About {
         JLabel line9 = new JLabel("Charmel Mbala");
         
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+        myPanel.add(line0);
         myPanel.add(line1);
         myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         myPanel.add(line2);
