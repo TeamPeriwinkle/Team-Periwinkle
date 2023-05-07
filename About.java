@@ -25,10 +25,10 @@ public class About {
         JLabel line3 = new JLabel("This app is provided by Team Periwinkle.");
         JLabel line4 = new JLabel("Members of Team Periwinkle:");
         JLabel line5 = new JLabel("Soe Lin, nickname: redpanda1222");
-        JLabel line6 = new JLabel("Alex Garcia");
-        JLabel line7 = new JLabel("Mahiliet Awasso,nickname:mahi"); 
-        JLabel line8 = new JLabel("Mey Vo");
-        JLabel line9 = new JLabel("Charmel Mbala");
+        JLabel line6 = new JLabel("Alex Garcia, nickname: froabble");
+        JLabel line7 = new JLabel("Mahiliet Awasso, nickname: mahi"); 
+        JLabel line8 = new JLabel("Mey Vo, nickname: meyww");
+        JLabel line9 = new JLabel("Charmel Mbala, nickname: luckycharms0");
         
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
         myPanel.add(line0);
