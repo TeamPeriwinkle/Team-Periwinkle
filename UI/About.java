@@ -1,14 +1,24 @@
-//About
-//Soe Lin
-
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class About {
+/**
+ * About UI + Object class.
+ * @author Soe Lin
+ */
+
+public class About extends JFrame {
 	
     private static final String VERSIONNUMBER = " 0.1";
 	private String firstname;
@@ -16,12 +26,37 @@ public class About {
 	private JPanel myPanel;
 	
 	public About(String theName, String theEmail) {
+        super("DIY Control");
 		firstname = theName;
 		email = theEmail;
 		myPanel = new JPanel();
 	}
 	
-	public void setup() {
+	public void display() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(400, 400);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        
+        JLabel titleLabel = new JLabel("About");
+        titleLabel.setFont(new Font("", Font.BOLD, 24));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        this.add(titleLabel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        this.add(myPanel, gbc);
+
+        JButton backButton = new JButton("Back");
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        this.add(backButton, gbc);
+
         JLabel line0 = new JLabel("Version Number:" + VERSIONNUMBER);
 		JLabel line1 = new JLabel("This app is registered to: " + firstname);
 		JLabel line2 = new JLabel("Email address of the user: " + email);
@@ -33,16 +68,16 @@ public class About {
         JLabel line8 = new JLabel("Mey Vo, nickname: meyww");
         JLabel line9 = new JLabel("Charmel Mbala, nickname: luckycharms0");
         
-        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
         myPanel.add(line0);
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line1);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line2);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line3);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line4);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line5);
         myPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         myPanel.add(line6);
@@ -52,9 +87,28 @@ public class About {
         myPanel.add(line8);
         myPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         myPanel.add(line9);
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            
+                //need user Home Page to go back
+                System.out.println("Mouse clicked!");
+            
+            }
+        });
+
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+
 	}
 	
 	public JPanel getPanel() {
 		return myPanel;
 	}
+
+    public static void main(String[] theArgs) {
+        About a = new About("Soe", "soehtet2002@gmail.com");
+        a.display();
+    }
 }

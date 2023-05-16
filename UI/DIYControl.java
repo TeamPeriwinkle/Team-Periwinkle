@@ -129,7 +129,7 @@ public class DIYControl extends JFrame {
                 buttonsPanel.remove(exitButton);
                 
                 About a = new About(firstname, email);
-                a.setup();
+                a.display();
                 aboutPanel = a.getPanel();
                 
                 gbc.gridx = 0;
