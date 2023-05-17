@@ -21,13 +21,13 @@ import javax.swing.JPanel;
 public class About extends JFrame {
 	
     private static final String VERSIONNUMBER = " 0.1";
-	private String firstname;
+	private String username;
 	private String email;
 	private JPanel myPanel;
 	
 	public About(String theName, String theEmail) {
-        super("DIY Control");
-		firstname = theName;
+        super("DIYControl");
+		username = theName;
 		email = theEmail;
 		myPanel = new JPanel();
 	}
@@ -58,7 +58,7 @@ public class About extends JFrame {
         this.add(backButton, gbc);
 
         JLabel line0 = new JLabel("Version Number:" + VERSIONNUMBER);
-		JLabel line1 = new JLabel("This app is registered to: " + firstname);
+		JLabel line1 = new JLabel("This app is registered to: " + username);
 		JLabel line2 = new JLabel("Email address of the user: " + email);
         JLabel line3 = new JLabel("This app is provided by Team Periwinkle.");
         JLabel line4 = new JLabel("Members of Team Periwinkle:");
