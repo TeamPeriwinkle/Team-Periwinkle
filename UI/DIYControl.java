@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class DIYControl extends JFrame {
 
@@ -17,7 +22,7 @@ public class DIYControl extends JFrame {
     private JButton backButton;
     private JButton createButton;
     private JButton exitButton;
-    private String firstname;
+    private String username;
     private String email;
     private String password;
 
@@ -84,15 +89,20 @@ public class DIYControl extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                firstname = usernameField.getText();
+                username = usernameField.getText();
                 password = String.valueOf(passwordField.getPassword());
 
-                if (firstname.compareTo("") == 0 || password.compareTo("") == 0) {
-                    JOptionPane.showMessageDialog(getParent(),
-                            "Please enter your Username and Password.", "DIYControl",
-                            JOptionPane.WARNING_MESSAGE);
+                if (username.compareTo("") == 0 || password.compareTo("") == 0) {
+                    JOptionPane.showMessageDialog(getParent(), "Please enter your Username and Password.");
                 } else {
-                    dispose();
+                    if (checkCredentials(username, password)) {
+                        dispose();
+                        JOptionPane.showMessageDialog(getParent(),
+                            "Login Success.");
+                    } else {
+                        JOptionPane.showMessageDialog(getParent(), "Wrong Username or Password.");
+                    }
+                    
                     // create user Home Page
                 }
 
@@ -147,16 +157,29 @@ public class DIYControl extends JFrame {
         createButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                firstname = usernameField.getText();
+                username = usernameField.getText();
                 email = emailField.getText();
                 password = String.valueOf(passwordField.getPassword());
 
-                if (firstname.compareTo("") == 0 || email.compareTo("") == 0 || password.compareTo("") == 0) {
+                if (username.compareTo("") == 0 || email.compareTo("") == 0 || password.compareTo("") == 0) {
                     JOptionPane.showMessageDialog(getParent(),
                             "Please enter your Username, Email Address, and Password.", "DIYControl",
                             JOptionPane.WARNING_MESSAGE);
                 } else {
-                    dispose();
+                    if (checkUsername(username)) {
+                        JOptionPane.showMessageDialog(getParent(), "Username already exists. Please try again.");
+                    } else {
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Data/users.csv", true))) {
+                            String line = username + "," + password + "," + email;
+                            writer.write(line);
+                            writer.newLine();
+                            JOptionPane.showMessageDialog(getParent(), "Signup successful!");
+                            dispose();
+                        } catch (IOException theE) {
+                            theE.printStackTrace();
+                        }
+                    }
+                    //dispose();
                     // create user Home Page
                 }
 
@@ -208,6 +231,36 @@ public class DIYControl extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
+    }
+
+    private boolean checkUsername(String username) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Data/users.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equals(username)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean checkCredentials(String username, String password) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Data/users.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts[0].equals(username) && parts[1].equals(password)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private void setup() {
