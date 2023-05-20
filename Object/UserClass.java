@@ -1,4 +1,5 @@
 public class UserClass {
+    private static String username;
     private String name;
     private String email;
     

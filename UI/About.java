@@ -14,14 +14,44 @@ public class About {
 	private String firstname;
 	private String email;
 	private JPanel myPanel;
+
 	
 	public About(String theName, String theEmail) {
 		firstname = theName;
 		email = theEmail;
 		myPanel = new JPanel();
 	}
+<<<<<<< Updated upstream
 	
 	public void setup() {
+=======
+
+    public void display() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(400, 400);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        
+        JLabel titleLabel = new JLabel("About");
+        titleLabel.setFont(new Font("", Font.BOLD, 24));
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        this.add(titleLabel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        this.add(myPanel, gbc);
+
+        JButton backButton = new JButton("Back");
+        
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        this.add(backButton, gbc);
+
+>>>>>>> Stashed changes
         JLabel line0 = new JLabel("Version Number:" + VERSIONNUMBER);
 		JLabel line1 = new JLabel("This app is registered to: " + firstname);
 		JLabel line2 = new JLabel("Email address of the user: " + email);
@@ -52,9 +82,33 @@ public class About {
         myPanel.add(line8);
         myPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         myPanel.add(line9);
+<<<<<<< Updated upstream
 	}
 	
 	public JPanel getPanel() {
 		return myPanel;
 	}
+=======
+        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            
+                //need user Home Page to go back
+                UserHomePage userHomePage = new UserHomePage();
+                userHomePage.setVisible(true);
+            
+            }
+        });
+
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+
+	}
+
+    public static void main(String[] theArgs) {
+        About a = new About("Soe", "soehtet2002@gmail.com");
+        a.display();
+    }
+>>>>>>> Stashed changes
 }
