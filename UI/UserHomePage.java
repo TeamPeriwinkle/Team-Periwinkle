@@ -19,6 +19,7 @@ public class UserHomePage extends JFrame {
     private JLabel titleLabel;
 
     public UserHomePage() {
+        
         setTitle("DIY Control");
         setSize(500, 500);
         setLayout(new BorderLayout());
@@ -103,10 +104,9 @@ public class UserHomePage extends JFrame {
 
                             if (!projectName.trim().isEmpty()) {
                                 boolean saved = saveProject(projectName, budget, plan, description);
-
                                 if (saved) {
                                     JOptionPane.showMessageDialog(projectPage, "New project created and saved: " + projectName, "Create Project", JOptionPane.INFORMATION_MESSAGE);
-                                    updateProjectList(); // Update the project list on the screen
+                                    updateProjectList(); 
                                 } else {
                                     JOptionPane.showMessageDialog(projectPage, "Failed to save the project", "Create Project", JOptionPane.WARNING_MESSAGE);
                                 }
@@ -121,29 +121,22 @@ public class UserHomePage extends JFrame {
                 gbc.gridwidth = 2;
                 gbc.insets = new Insets(-300, 10, 10, 10);
                 projectPanel.add(createProjectButton, gbc);
-
-                // Project list panel
                 projectListPanel = new JPanel(new GridBagLayout());
                 GridBagConstraints gbcList = new GridBagConstraints();
                 gbcList.gridx = 0;
                 gbcList.gridy = 0;
                 gbcList.insets = new Insets(10, 10, 10, 10);
                 projectPanel.add(projectListPanel, gbcList);
-
-                // Update the project list on the screen
-                updateProjectList();
-
                 projectPage.add(projectPanel, BorderLayout.CENTER);
-                projectPage.setJMenuBar(menuBar); // Add the menu bar to the project page
+                projectPage.setJMenuBar(menuBar); 
                 projectPage.setVisible(true);
+                updateProjectList();
             }
         });
-        createMenuBar(); // Create the menu bar for the project page
+        createMenuBar(); // taskicon
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
-
-
 
     private boolean saveProject(String title, double budget, String plan, String description) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("Data/projects.csv", true))) {
@@ -157,37 +150,60 @@ public class UserHomePage extends JFrame {
     }
 
     private void updateProjectList() {
-        projectListPanel.removeAll(); // Clear the project list panel
+        projectListPanel.removeAll(); 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.insets = new Insets(5, 5, 5, 5);
-        
     
         try (BufferedReader br = new BufferedReader(new FileReader("Data/projects.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] projectData = line.split(",");
-                if (projectData.length >= 4) { // Check if the project data is valid
+                if (projectData.length >= 4) { 
                     String projectName = projectData[0];
+    
+                    // Create the project button
                     JButton projectButton = new JButton(projectName);
-                    projectButton.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
+                    projectButton.setHorizontalAlignment(SwingConstants.LEFT); 
+                    projectButton.setPreferredSize(new Dimension(220, 25)); 
+    
+                    // Create the delete 
+                    JLabel deleteLabel = new JLabel("-");
+                    deleteLabel.setFont(new Font("", Font.BOLD, 20));
+                    deleteLabel.setForeground(Color.RED); 
+                    deleteLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); 
+    
+                    deleteLabel.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            int confirm = JOptionPane.showConfirmDialog(projectListPanel, "Are you sure you want to delete this project?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                            if (confirm == JOptionPane.YES_OPTION) {
+                                // Delete the project
+                                boolean deleted = deleteProject(projectName);
+                                if (deleted) {
+                                    JOptionPane.showMessageDialog(projectListPanel, "Project deleted: " + projectName, "Delete Project", JOptionPane.INFORMATION_MESSAGE);
+                                    updateProjectList(); 
+                                } else {
+                                    JOptionPane.showMessageDialog(projectListPanel, "Failed to delete the project", "Delete Project", JOptionPane.WARNING_MESSAGE);
+                                }
+                            }
+                        }
+    
+                        private boolean deleteProject(String projectName) {
+                            return true;
                         }
                     });
+                    projectButton.setLayout(new BorderLayout());
+                    projectButton.add(deleteLabel, BorderLayout.EAST);
                     projectListPanel.add(projectButton, gbc);
-                    gbc.gridy++; // line for next project
+                    gbc.gridy++; 
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    
-        // Refresh the project list panel
         projectListPanel.revalidate();
         projectListPanel.repaint();
     }
-
     
     private void createMenuBar() {
         menuBar = new JMenuBar();
