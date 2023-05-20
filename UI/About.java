@@ -1,32 +1,38 @@
-//About
-//Soe Lin
-
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class About {
+/**
+ * About UI + Object class.
+ * @author Soe Lin
+ */
+
+public class About extends JFrame {
 	
     private static final String VERSIONNUMBER = " 0.1";
-	private String firstname;
+	private String username;
 	private String email;
 	private JPanel myPanel;
-
 	
 	public About(String theName, String theEmail) {
-		firstname = theName;
+        super("DIYControl");
+		username = theName;
 		email = theEmail;
 		myPanel = new JPanel();
 	}
-<<<<<<< Updated upstream
 	
-	public void setup() {
-=======
-
-    public void display() {
+	public void display() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400, 400);
         this.setLayout(new GridBagLayout());
@@ -51,9 +57,8 @@ public class About {
         gbc.gridy = 2;
         this.add(backButton, gbc);
 
->>>>>>> Stashed changes
         JLabel line0 = new JLabel("Version Number:" + VERSIONNUMBER);
-		JLabel line1 = new JLabel("This app is registered to: " + firstname);
+		JLabel line1 = new JLabel("This app is registered to: " + username);
 		JLabel line2 = new JLabel("Email address of the user: " + email);
         JLabel line3 = new JLabel("This app is provided by Team Periwinkle.");
         JLabel line4 = new JLabel("Members of Team Periwinkle:");
@@ -63,16 +68,16 @@ public class About {
         JLabel line8 = new JLabel("Mey Vo, nickname: meyww");
         JLabel line9 = new JLabel("Charmel Mbala, nickname: luckycharms0");
         
-        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
         myPanel.add(line0);
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line1);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line2);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line3);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line4);
-        myPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+        myPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         myPanel.add(line5);
         myPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         myPanel.add(line6);
@@ -82,20 +87,13 @@ public class About {
         myPanel.add(line8);
         myPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         myPanel.add(line9);
-<<<<<<< Updated upstream
-	}
-	
-	public JPanel getPanel() {
-		return myPanel;
-	}
-=======
         myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             
                 //need user Home Page to go back
-                UserHomePage userHomePage = new UserHomePage();
+                UserHomePage userHomePage = new UserHomePage(); 
                 userHomePage.setVisible(true);
             
             }
@@ -105,10 +103,13 @@ public class About {
         this.setVisible(true);
 
 	}
+	
+	public JPanel getPanel() {
+		return myPanel;
+	}
 
     public static void main(String[] theArgs) {
         About a = new About("Soe", "soehtet2002@gmail.com");
         a.display();
     }
->>>>>>> Stashed changes
 }
