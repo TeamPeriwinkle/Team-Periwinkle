@@ -93,6 +93,7 @@ public class About extends JFrame {
             public void actionPerformed(ActionEvent e) {
             
                 //need user Home Page to go back
+                dispose();
                 UserHomePage userHomePage = new UserHomePage(); 
                 userHomePage.setVisible(true);
             
@@ -100,6 +101,7 @@ public class About extends JFrame {
         });
 
         this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
 	}

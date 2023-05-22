@@ -49,6 +49,7 @@ public class UserHomePage extends JFrame {
         aboutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Create and show the UserHomePage
+                dispose();
                 About a = new About("Soe", "soehtet2002@gmail.com");
                 a.display();
             }
@@ -135,6 +136,7 @@ public class UserHomePage extends JFrame {
         });
         createMenuBar(); // taskicon
         this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
