@@ -11,10 +11,10 @@ public class NotesClass {
         gui.textArea.setText("");
         gui.window.setTitle("New");
     }
-    public void Open(){
-        FileDialog fd = new FileDialog(gui.window,"Open",FileDialog.LOAD);
-        fd.setVisible(true);
+    //public void Open(){
+       // FileDialog fd = new FileDialog(gui.window,"Open",FileDialog.LOAD);
+        //fd.setVisible(true);
 
         
-    }
+    //}
 }

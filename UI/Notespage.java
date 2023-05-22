@@ -88,7 +88,7 @@ public class Notespage implements ActionListener{
         switch(command){
             
             case "New":file.newFile(); break;
-            case "Open":file.Open(); break;
+           // case "Open":file.Open(); break;
         }
     }
 }
